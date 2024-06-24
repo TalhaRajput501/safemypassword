@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Passwords</title>
+    <link rel="icon" href="lock.png" type="image/png" sizes="50x50">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            transition: 5s;
+        }
+
+        img {
+
+            cursor: pointer;
+            position: relative;
+            width: 26px;
+            height: 14px;
+            bottom: 6px;
+
+        }
+
+        #alert {
+            display: none;
+        }
+
+        #navigation {
+            background-color: black;
+            top: 0;
+            z-index: 1;
+        }
+
+        /* Navigation Bar Section */
+        .nav {
+            height: 55px;
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav ul {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav ul li {
+            list-style: none;
+
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.9rem;
+            margin: 0 32px;
+            cursor: pointer;
+        }
+
+        .nav ul li a {
+            margin: 0 5px;
+            color: white;
+            text-decoration: none;
+            padding: 2px 28px;
+            border-radius: 8px;
+        }
+
+        .nav ul li a:hover {
+            background-color: white;
+            color: black;
+            transition: 0.5s;
+        }
+
+        /* Navigation Bar End */
+        .container {
+            width: 80%;
+            margin: 23px auto;
+            margin-bottom: 112px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 9px 0;
+        }
+
+        /* Submit Button  */
+        .btn {
+            padding: 5px 22px;
+            background-color: black;
+            color: white;
+            margin: 7px 0;
+            cursor: pointer;
+        }
+
+        .btnsm {
+            padding: 3px 18px;
+            background-color: black;
+            color: white;
+            margin: 2px 0;
+            cursor: pointer;
+        }
+
+        /* Table Ssection */
+        table,
+        td,
+        tr {
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 5px 16px;
+        }
+
+        /* Contact Section   Starts Here*/
+        #contact {
+
+            height: 360px;
+            justify-content: center;
+            width: 80%;
+            margin: 4px auto;
+            padding-top: 25px;
+        }
+
+
+        .contact-box {
+            margin-top: 39px;
+            padding: 22px 0;
+            justify-content: center;
+            display: flex;
+        }
+
+        .contact-h {
+            /* position: absolute;
+            padding: 10px 0; */
+            font-size: xx-large;
+        }
+
+        .para {
+            font-size: 22px;
+            z-index: 1;
+            font-weight: bold;
+            position: relative;
+            color: rgb(0, 0, 0);
+        }
+
+        .para::after {
+            position: absolute;
+            background-color: rgb(0, 0, 0);
+            z-index: -1;
+            content: "";
+            left: 0;
+            top: -28px;
+            transform: rotate(10deg);
+            width: 50px;
+            height: 35px;
+            border-top-left-radius: 37px;
+            border-bottom-right-radius: 37px;
+
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .footer-r {
+            text-align: center;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-emoji {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .emoji {
+            color: black;
+            filter: invert(1);
+            font-size: 18px;
+            display: inline;
+            margin: 0 2px;
+        }
+
+        .emoji-tele {
+            color: black;
+            /* filter: invert(1); */
+            font-size: 18px;
+            display: inline;
+            margin: 0 2px;
+        }
+
+        /* Code For feedback section starts here */
+
+        #feedback {
+            padding: 25px 0px;
+            padding-bottom: 40px;
+            width: 100%;
+
+        }
+
+        .feed-row {
+            width: 85%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding-top: 30px;
+        }
+
+        .feed-col {
+            flex-basis: 30%;
+            padding: 10px;
+            margin-bottom: 27px;
+            border-radius: 5px;
+            box-shadow: 0 10px 18px 4px #6d6161;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        .feed-col:hover {
+            transform: translateY(-12px);
+        }
+
+        .feed-col p {
+            text-align: justify;
+        }
+
+        .user h4 {
+            color: rgb(0, 0, 0);
+        }
+
+        .user small {
+            color: #4d4141;
+        }
+
+        /* code for form section  */
+
+        /* #contact {
+            position: relative;
+
+        } */
+
+
+
+        .contact-box {
+            padding: 12px 0px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+
+        .contact-item {
+            margin: 4px 0px;
+
+        }
+
+        .contact-item textarea,
+        .contact-item input {
+            padding: 12px;
+            width: 500px;
+            border-radius: 3px;
+            border: 0.8px solid rgb(80, 73, 73);
+            display: flex;
+        }
+
+
+
+        .contact-item label {
+            color: rgb(0, 0, 0);
+            font-size: 1.2rem;
+        }
+
+
+
+
+        /* Contact form button */
+        .button a:hover {
+            color: white;
+            background-color: #000000;
+            transition: 0.5s;
+        }
+
+        .button a {
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 0px;
+            width: 115px;
+            margin: 22px 0px;
+            display: flex;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 2px;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            position: relative;
+            background-color: #ffffff;
+        }
+
+        .button a span {
+            width: 0%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+            /* background: rgb(82, 77, 77); */
+            z-index: -1;
+
+        }
+
+        .button a:hover span {
+            width: 100%;
+
+        }
+
+        /* Code For Contact Us section ends here */
+    </style>
+
+</head>
+
+<body>
+    <nav id="navigation">
+        <div class="nav">
+            <div class="logo">Pass-X</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#feed-back">Feedback</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Password Manager</h1>
+        <p>
+            🔒 &nbsp;Your Security, Our Priority <br>
+            &nbsp; &nbsp; &nbsp;Hello Sir! <br>
+        <p>
+            Take control of your digital security with "Pass-X". Our app provides robust
+            protection for your passwords and sensitive information, ensuring they are encrypted and accessible only to
+            you. Seamlessly sync across all your devices so you can manage passwords effortlessly, whether you're at
+            home, at work, or traveling. With an intuitive interface designed for ease of use, "Pass-X" makes it simple
+            to generate strong passwords, securely store them, and autofill login details with
+            just a click. Protect your digital life today and enjoy peace of mind knowing your information is safe with
+            "Pass-X".
+        </p>
+        </p>
+        <h2>Your Passwords <span id="alert">(Copied!)</span></h2>
+        <table>
+
+            <tr>
+                <th>Website</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Delete</th>
+            </tr>
+
+        </table>
+        <h3>Add a Password 🔑</h3>
+        <form action="/submit" method="post">
+
+            <!-- website input -->
+            <label for="website">Website:</label>
+            <input type="text" id="website" name="website">
+            <br><br>
+            <!-- username input -->
+            <label for="username">User name:</label>
+            <input type="text" id="username" name="username">
+            <br><br>
+            <!--password input -->
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password">
+            <required></required>
+            <br><br>
+            <!--Submit Button -->
+            <button type="submit" class="btn">Save</button>
+        </form>
+
+
+    </div>
+    <hr>
+    <div id="feed-back">
+        <section id="feedback">
+            <div class="contact-box">
+                <p class="para">FEED BACK</p>
+                <h1 class="contact-h">What Clients Says?</h1>
+            </div>
+            <div class="feed-row">
+                <div class="feed-col">
+                    <div class="user">
+                        <h4>Talha</h4>
+                        <small>@Talha Rajpoot</small>
+                    </div>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque corporis quisquam cum dolor sit
+                        amet
+                        dolor sit amet consectetur adipisicing elit. consectetur adipisicing elit. consequuntur placeat!
+                        dolor sit amet consectetur adipisicing elit. dolor sit amet consectetur adipisicing elit.
+                    </p>
+                </div>
+
+                <div class="feed-col">
+                    <div class="user">
+                        <h4>Hassan</h4>
+                        <small>@Hassan Rajpoot</small>
+                    </div>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque corporis quisquam dolor sit amet
+                        consectetur dolor sit amet consectetur adipisicing elit. adipisicing elit. cum consectetur
+                        adipisicing elit.
+                    </p>
+                </div>
+
+                <div class="feed-col">
+                    <div class="user">
+                        <h4>Attiq</h4>
+                        <small>@Attiq Rajpoot</small>
+                    </div>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque corporis quisquam cum dolor sit
+                        amet
+                        consectetur dolor sit amet consectetur adipisicing elit. adipisicing elit. consequuntur placeat!
+                        dolor sit amet consectetur adipisicing elit. dolor sit amet consectetur adipisicing elit.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback section ends here -->
+    </div>
+    <hr>
+    <div id="contact">
+        <div class="contact-box">
+            <p class="para">Contact Us</p>
+            <h1 class="contact-h">Visit Our Office Today</h1>
+        </div>
+
+        <div class="footer">
+            <div class="footer-left">
+                <h1>Opening Hours</h1>
+
+                <div class="footer-emoji">
+                    <p class="emoji">⏱</p>
+                    <p> Monday to Friday - 9am to 7pm</p>
+                </div>
+                <div class="footer-emoji">
+                    <p class="emoji">⏱</p>
+                    <p>Saturday and Sunday (Holiday)</p>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <div class="footer-r">
+                    <h1>Get In Touch</h1>
+                    <div class="footer-emoji">
+                        <p>30 feet road, near higher secondary school Multan</p>
+                        <p class="emoji">💎</p>
+                        <p></p>
+                    </div>
+                    <div class="footer-emoji">
+                        <p>+92 3191748730</p>
+                        <p class="emoji-tele">📞</p>
+                        <p></p>
+                    </div>
+                    <div class="footer-emoji">
+                        <p>talhaashfaq4197@gmail.com</p>
+                        <p class="emoji-tele">📝</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us section starts here -->
+        <div id="contact">
+            <div class="contact-box">
+
+                <div class="contact-item">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" placeholder="Enter Your Name">
+                </div>
+
+                <div class="contact-item">
+                    <label for="name">Phone:</label>
+                    <input type="number" name="phone" id="phone" placeholder="Enter Your Phone">
+                </div>
+
+                <div class="contact-item">
+                    <label for="name">E-mail:</label>
+                    <input type="email" name="E-mail" id="E-mail" placeholder="Enter Your E-mail">
+                </div>
+
+                <div class="contact-item">
+                    <label for="name">Address:</label>
+                    <input type="text" name="address" id="address" placeholder="Enter Your Address">
+                </div>
+
+                <div class="contact-item">
+                    <label for="name">Enter your message:</label>
+                    <textarea name="disc" id="disc" cols="30" rows="10"
+                        placeholder="Enter your message......"></textarea>
+                </div>
+                <div class="button">
+                    <a class="btn"> <span></span>Submit</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Contact Us section ends here -->
+
+
+    </div>
+
+    <script>
+        //  Function to make password star
+        function maskPassword(pass) {
+            let str = ""
+            for (let index = 0; index < pass.length; index++) {
+                str += "*"
+            }
+            return str
+        }
+
+        //  Function to make password star
+
+
+        //  Function to copy the Text
+        function copytext(txt) {
+            navigator.clipboard.writeText(txt).then(
+                () => {
+                    document.getElementById("alert").style.display = "inline"
+                    setTimeout(() => {
+                        document.getElementById("alert").style.display = "none"
+                    }, 2000);
+                },
+                () => {
+                    alert("Failed to Copying text");
+                },
+            )
+        }
+
+
+        //  Function to Delete the Text
+        const deletePassword = (website) => {
+            let data = localStorage.getItem("passwords");
+            let arr = JSON.parse(data);
+            arrUpdated = arr.filter((e) => {
+                return e.website != website
+            })
+            localStorage.setItem("passwords", JSON.stringify(arrUpdated));
+            alert(`Successfully delete ${website}'s password`)
+            showPasswords()
+        }
+
+
+        // Logic to fill the table
+        const showPasswords = () => {
+            let tb = document.querySelector("table");
+            let data = localStorage.getItem("passwords");
+            if (data == null || JSON.parse(data).length == 0) {
+                tb.innerHTML = "No Data To Show"
+            }
+            else {
+                tb.innerHTML = `
+        <tr>
+        <th>Website</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Delete</th>
+        </tr>`
+                let arr = JSON.parse(data);
+                let str = "";
+                for (let index = 0; index < arr.length; index++) {
+                    const element = arr[index];
+
+                    str += `<tr>
+        <td>${element.website} <img  onclick="copytext('${element.website}')" src="copy.svg" alt="Copy Button" width="10" height="10"> </td>
+        <td>${element.username} <img  onclick="copytext('${element.username}')" src="copy.svg" alt="Copy Button" width="10" height="10"> </td>
+        <td>${maskPassword(element.password)} <img  onclick="copytext('${element.password}')" src="copy.svg" alt="Copy Button" width="10" height="10"> </td>
+        <td><button class="btnsm" onclick = "deletePassword('${element.website}')">Delete</button></td>
+        </tr>`
+                }
+                tb.innerHTML = tb.innerHTML + str
+            }
+            // To reset form after filling
+            website.value = ""
+            username.value = ""
+            password.value = ""
+        }
+
+        console.log("Working");
+        showPasswords()
+        document.querySelector(".btn").addEventListener("click", (e) => {
+            e.preventDefault()
+            console.log("Clicked......")
+            console.log(username.value, password.value);
+            let passwords = localStorage.getItem("passwords");
+            console.log(passwords);
+            if (passwords == null) {
+                let json = []
+                json.push({ website: website.value, username: username.value, password: password.value });
+                alert("Password Saved");
+                localStorage.setItem("passwords", JSON.stringify(json));
+            } else {
+                let json = JSON.parse(localStorage.getItem("passwords"));
+                json.push({ website: website.value, username: username.value, password: password.value });
+                alert("Password Saved");
+                localStorage.setItem("passwords", JSON.stringify(json));
+            }
+            showPasswords()
+        })
+    </script>
+</body>
+
+</html>
